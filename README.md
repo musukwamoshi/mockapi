@@ -33,6 +33,7 @@ Swagger UI: Navigate to https://localhost:7226/swagger or http://localhost:5198/
 OR
 
 Postman / curl
+
 POST request
 http://localhost:5198/api/MockAPI   
 
