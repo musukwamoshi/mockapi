@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Xml.Linq;
@@ -37,18 +38,17 @@ namespace Truestory.Mock.API.Repository
             }
 
         }
-        public async Task<MockAPIObjectCreated?> AddMockObjectAsync(MockAPIObject newObject)
+        public async Task<MockAPIObjectCreated?> AddMockObjectAsync([FromBody] CreateMockAPIObject newObject)
         {
-            var client = _httpClientFactory.CreateClient("RestfulApi");
+            var client = _httpClientFactory.CreateClient("MockApi");
 
-            var json = JsonSerializer.Serialize(newObject);
+            var json = JsonSerializer.Serialize<CreateMockAPIObject>(newObject);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync("objects", content);
 
             if (!response.IsSuccessStatusCode)
                 return null;
-
             var result = await response.Content.ReadAsStringAsync();
             var objectCreated = JsonSerializer.Deserialize<MockAPIObjectCreated>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return objectCreated;
@@ -56,12 +56,20 @@ namespace Truestory.Mock.API.Repository
 
         public async  Task<MockAPIObjectDeleted?> DeleteMockObjectsByIdAsync(string id)
         {
-            var client = _httpClientFactory.CreateClient("RestfulApi");
+            var client = _httpClientFactory.CreateClient("MockApi");
 
             var response = await client.DeleteAsync($"objects/{id}");
 
             if (!response.IsSuccessStatusCode)
-                return null;
+            {
+                var errorResult = await response.Content.ReadAsStringAsync();
+
+                var objectNotDeleted = JsonSerializer.Deserialize<MockAPIObjectNotDeleted>(errorResult, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                var error = new MockAPIObjectDeleted() { Message = objectNotDeleted!.Error };
+                return error;
+
+            }
+
             var result = await response.Content.ReadAsStringAsync();
             var objectDeleted = JsonSerializer.Deserialize<MockAPIObjectDeleted>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             return objectDeleted;

@@ -10,7 +10,7 @@ namespace Truestory.Mock.API.Repository.Interfaces
     public interface IMockAPIRepository
     {
         Task<IEnumerable<MockAPIObject>> GetMockObjectsAsync();
-        Task<MockAPIObjectCreated?> AddMockObjectAsync(MockAPIObject newObject);
+        Task<MockAPIObjectCreated?> AddMockObjectAsync(CreateMockAPIObject newObject);
         Task<MockAPIObjectDeleted?> DeleteMockObjectsByIdAsync(string id);
     }
 }

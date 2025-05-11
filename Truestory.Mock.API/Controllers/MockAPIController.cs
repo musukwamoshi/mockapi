@@ -25,15 +25,16 @@ namespace Truestory.Mock.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetObjectsByName([FromQuery] string name="", [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public async Task<IActionResult> GetObjects([FromQuery] string name="", [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var response = await _mockAPIService.OnGetMockObjectsByNameAsync(name, page, pageSize);
             return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddObject([FromBody] MockAPIObject newObject)
+        public async Task<IActionResult> AddObject([FromBody] CreateMockAPIObject newObject)
         {
+            
             if (ModelState.IsValid)
             {
                 var response = await _mockAPIService.OnAddMockObjectAsync(newObject);
@@ -50,6 +51,7 @@ namespace Truestory.Mock.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteObject(string id)
         {
+           
             if (String.IsNullOrEmpty(id))
             {
                 return BadRequest("Id cannot be null or empty");

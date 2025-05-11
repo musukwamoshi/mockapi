@@ -35,13 +35,17 @@ OR
 Postman / curl
 
 POST request
-http://localhost:5198/api/MockAPI   
+http://localhost:5198/api/MockAPI?name=Apple%20MacBook%20Pro%2016&page=1&pageSize=10
 
 Body
 {
-  "id": "string",
-  "name": "string",
-  "data": "string"
+   "name": "Apple MacBook Pro 17",
+   "data": {
+      "year": 2025,
+      "price": 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+   }
 }
 
 GET request
@@ -49,4 +53,4 @@ http://localhost:5198/api/MockAPI
 
 
 DELETE request
-http://localhost:5198/api/MOockAPI/{id}   
+http://localhost:5198/api/MOockAPI/ff808181932badb60196c154a6f072c0   

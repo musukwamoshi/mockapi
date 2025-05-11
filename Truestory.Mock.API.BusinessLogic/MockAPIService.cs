@@ -32,7 +32,7 @@ namespace Truestory.Mock.API.BusinessLogic
             }
                
         }
-        public async Task<MockAPIObjectCreated?> OnAddMockObjectAsync(MockAPIObject newObject)
+        public async Task<MockAPIObjectCreated?> OnAddMockObjectAsync(CreateMockAPIObject newObject)
         {
             var response = await _mockAPIRepository.AddMockObjectAsync(newObject);
             return response;

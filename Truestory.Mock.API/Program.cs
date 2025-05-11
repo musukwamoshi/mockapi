@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Diagnostics;
 using Truestory.Mock.API.BusinessLogic;
 using Truestory.Mock.API.BusinessLogic.Interfaces;
+using Truestory.Mock.API.Exceptions;
 using Truestory.Mock.API.Repository;
 using Truestory.Mock.API.Repository.Interfaces;
 
@@ -16,7 +18,8 @@ builder.Services.AddHttpClient("MockApi", client =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+//add global error handling
+builder.Services.AddExceptionHandler<MockAPIExceptionHandler>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

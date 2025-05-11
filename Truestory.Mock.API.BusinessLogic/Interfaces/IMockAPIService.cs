@@ -10,7 +10,7 @@ namespace Truestory.Mock.API.BusinessLogic.Interfaces
     public interface IMockAPIService
     {
         Task<IEnumerable<MockAPIObject>> OnGetMockObjectsByNameAsync(string name, int page,int pageSize);
-        Task<MockAPIObjectCreated?> OnAddMockObjectAsync(MockAPIObject newObject);
+        Task<MockAPIObjectCreated?> OnAddMockObjectAsync(CreateMockAPIObject newObject);
         Task<MockAPIObjectDeleted?> OnDeleteMockObjectsByIdAsync(string id);
     }
 }
