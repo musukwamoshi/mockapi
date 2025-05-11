@@ -1,0 +1,6 @@
+@Truestory.Mock.API_HostAddress = http://localhost:5198
+
+GET {{Truestory.Mock.API_HostAddress}}/MockAPI/
+Accept: application/json
+
+###
