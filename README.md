@@ -35,7 +35,7 @@ OR
 Postman / curl
 
 POST request
-http://localhost:5198/api/MockAPI?name=Apple%20MacBook%20Pro%2016&page=1&pageSize=10
+http://localhost:5198/api/MockAPI
 
 Body
 {
@@ -49,7 +49,7 @@ Body
 }
 
 GET request
-http://localhost:5198/api/MockAPI  
+http://localhost:5198/api/MockAPI?name=Apple%20MacBook%20Pro%2016&page=1&pageSize=10  
 
 
 DELETE request
